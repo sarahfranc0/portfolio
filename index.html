@@ -94,8 +94,8 @@ h1 em{display:block;font-style:italic;background:linear-gradient(135deg,#9b7dd4,
 #bio-card.expanded::after{opacity:0;}
 .bio-toggle{position:absolute;right:1.8rem;bottom:1.3rem;z-index:2;background:rgba(255,255,255,0.75);backdrop-filter:blur(10px);border:1px solid rgba(42,36,48,0.15);border-radius:100px;padding:0.5rem 1.2rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.25s;}
 .bio-toggle:hover{color:var(--ink);border-color:rgba(42,36,48,0.3);background:rgba(255,255,255,0.95);}
-.about-photo-circle{width:130px;height:130px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.85);box-shadow:0 4px 20px rgba(160,120,200,0.18);}
-.about-photo-circle img{width:100%;height:100%;object-fit:cover;display:block;}
+.about-photo-circle{width:150px;height:150px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.85);box-shadow:0 4px 20px rgba(160,120,200,0.18);}
+.about-photo-circle img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;border-radius:20px;overflow:hidden;}
 .stat{padding:2rem 1.5rem;background:rgba(255,255,255,0.5);backdrop-filter:blur(16px);text-align:center;}
 .stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:300;background:linear-gradient(135deg,#9b7dd4,#d4679a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.25;padding-top:0.1em;margin-bottom:0.2rem;}
@@ -251,7 +251,7 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
   <div class="section-divider"></div>
   <div class="about-stack">
     <div class="glass about-card reveal" id="bio-card">
-      <div class="about-photo-circle" style="margin:0 auto 1.5rem;"><img src="bio-photo.jpg" alt="Sarah Franco"/></div>
+      <div class="about-photo-circle" style="margin:0 0 1.5rem;"><img src="bio-photo.jpg" alt="Sarah Franco"/></div>
       <div class="bio-chapter">
         <div class="bio-chapter-title">Character Bio</div>
         <p>I'm a <strong>Marketing graduate</strong> from Seattle University, having completed my Bachelor's degree a year early (June 2026) with magna cum laude honors. I'm based in <strong>Los Angeles</strong>, with hands-on experience spanning digital asset management, live broadcast production, social media content, and event operations.</p>
