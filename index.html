@@ -75,8 +75,8 @@ h1 em{display:block;font-style:italic;background:linear-gradient(135deg,#9b7dd4,
 .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:rise 1s 0.75s both;}
 .btn-glow{display:inline-block;padding:0.85rem 2rem;background:linear-gradient(135deg,rgba(201,184,240,0.6),rgba(240,184,204,0.6));backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.7);border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;color:var(--ink);text-decoration:none;transition:all 0.3s;box-shadow:0 4px 20px rgba(180,140,230,0.2);}
 .btn-glow:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(180,140,230,0.35);}
-.btn-ghost{display:inline-block;padding:0.85rem 2rem;background:rgba(255,255,255,0.35);backdrop-filter:blur(10px);border:1px solid rgba(42,36,48,0.12);border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:400;color:var(--muted);text-decoration:none;transition:all 0.3s;}
-.btn-ghost:hover{color:var(--ink);border-color:rgba(42,36,48,0.3);background:rgba(255,255,255,0.55);}
+.btn-ghost{display:inline-block;padding:0.85rem 2rem;background:#ffffff;backdrop-filter:blur(10px);border:1px solid rgba(42,36,48,0.12);border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;color:var(--ink);text-decoration:none;transition:all 0.3s;box-shadow:0 4px 20px rgba(160,120,200,0.1);}
+.btn-ghost:hover{background:linear-gradient(135deg,rgba(201,184,240,0.6),rgba(240,184,204,0.6));border-color:rgba(255,255,255,0.7);color:var(--ink);transform:translateY(-2px);box-shadow:0 8px 32px rgba(180,140,230,0.35);}
 @keyframes rise{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
 /* ABOUT */
@@ -121,9 +121,13 @@ h1 em{display:block;font-style:italic;background:linear-gradient(135deg,#9b7dd4,
 .lead-detail{font-size:0.9rem;font-weight:300;color:rgba(42,36,48,0.6);line-height:1.75;}
 
 /* SKILLS */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
 .skill-card{padding:1.8rem 1.5rem;transition:transform 0.3s;}
 .skill-card:hover{transform:translateY(-4px);}
+.skill-card.clickable{cursor:pointer;}
+.skill-card.clickable:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 12px 30px rgba(155,125,212,0.25);}
+.exp-card.highlight,.lead-card.highlight{animation:expPulse 1.6s ease;}
+@keyframes expPulse{0%{box-shadow:0 0 0 0 rgba(155,125,212,0.55);}70%{box-shadow:0 0 0 14px rgba(155,125,212,0);}100%{box-shadow:0 0 0 0 rgba(155,125,212,0);}}
 .skill-icon{font-size:1.5rem;margin-bottom:0.8rem;display:block;}
 .skill-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--ink);margin-bottom:0.3rem;}
 .skill-desc{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--muted);line-height:1.7;}
@@ -147,6 +151,13 @@ footer span{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.1
 }
 .bap-section-title em{font-style:italic;}
 .bap-subsection{margin-bottom:3rem;}
+.bap-section-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:1rem;}
+.bap-section-header:hover .bap-section-title{color:#9b7dd4;}
+.bap-chevron{font-size:1.1rem;color:var(--muted);transition:transform 0.35s ease,color 0.25s;flex-shrink:0;}
+.bap-section-header:hover .bap-chevron{color:#9b7dd4;}
+.bap-subsection.collapsed .bap-chevron{transform:rotate(-90deg);}
+.bap-subsection .photo-grid,.bap-subsection .officer-grid{overflow:hidden;max-height:4000px;opacity:1;transition:max-height 0.5s ease,opacity 0.4s ease;}
+.bap-subsection.collapsed .photo-grid,.bap-subsection.collapsed .officer-grid{max-height:0;opacity:0;}
 .bap-divider{width:40px;height:2px;background:linear-gradient(90deg,#c9b8f0,#f0b8cc,transparent);border-radius:2px;margin-bottom:1.5rem;}
 
 /* photo gallery grid */
@@ -200,6 +211,10 @@ footer span{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.1
   .pg-section{padding:4rem 1.2rem;}
   footer{padding:1.5rem;flex-direction:column;gap:0.5rem;text-align:center;}
   .card-body{padding:2rem 1.5rem;}
+  .skills-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:480px){
+  .skills-grid{grid-template-columns:1fr;}
 }
 /* Custom Cursors */
 body{cursor:url('beetle.png') 18 18, auto;}
@@ -224,7 +239,8 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
   <a class="nav-logo" onclick="showPage('portfolio')">Sarah Franco</a>
   <ul class="nav-links">
     <li><a onclick="showPage('portfolio')" id="nav-portfolio" class="active">Portfolio</a></li>
-    <li><a onclick="showPage('bap')" id="nav-bap">Beta Alpha Psi</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About Me</a></li>
+    <li><a onclick="showPage('bap')" id="nav-bap">Previous Work</a></li>
     <li><a onclick="showPage('campaigns')" id="nav-campaigns">Campaigns</a></li>
   </ul>
 </nav>
@@ -239,16 +255,130 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
     <p class="hero-title">Marketing · Creative · Leader</p>
     <p class="hero-bio">Based in <strong>Los Angeles</strong>, with a passion for marketing, storytelling, and building communities.</p>
     <div class="hero-actions">
-      <a class="btn-glow" onclick="showPage('bap')">View My Work</a>
+      <a class="btn-glow" onclick="showPage('about')">About Me</a>
       <a class="btn-ghost" href="mailto:sfranco1@seattleu.edu">Get in Touch</a>
     </div>
   </div>
 </section>
 
-<section class="pg-section" id="about">
-  <div class="section-eyebrow">01 About</div>
-  <h2>A little about <em>me</em></h2>
+<section class="pg-section">
+  <div class="section-eyebrow">01 Experience</div>
+  <h2>Where I've <em>worked</em></h2>
   <div class="section-divider"></div>
+  <div class="exp-list">
+    <div class="glass exp-card reveal" id="exp-collaboration">
+      <div class="exp-header"><div class="exp-role">Media Production Center <em>· Student Assistant</em></div><div class="exp-date">Jul 2025 to Present</div></div>
+      <div class="exp-org">Seattle University</div>
+      <ul class="exp-bullets">
+        <li>Aided students and faculty with Adobe Suite day-to-day (11 hrs/week)</li>
+        <li>Trained others on equipment including lighting, audio, and production tools</li>
+        <li>Collaborated with team to create content for social media channels</li>
+      </ul>
+    </div>
+    <div class="glass exp-card reveal" id="exp-asset-management">
+      <div class="exp-header"><div class="exp-role">Digital Asset Management <em>· Intern</em></div><div class="exp-date">May to Aug 2025</div></div>
+      <div class="exp-org">Monster Energy · Corona, CA</div>
+      <ul class="exp-bullets">
+        <li>Engaged across meetings with diverse teams, asking questions and contributing ideas</li>
+        <li>Gained exposure to the inner workings of a major consumer brand</li>
+      </ul>
+    </div>
+    <div class="glass exp-card reveal" id="exp-production">
+      <div class="exp-header"><div class="exp-role">Production Assistant <em>· Broadcast</em></div><div class="exp-date">Aug 2023 to Oct 2025</div></div>
+      <div class="exp-org">Seattle University · ESPN+</div>
+      <ul class="exp-bullets">
+        <li>Adjusted broadcasting video/audio and produced live programs with full-sized HD camera for ESPN+</li>
+        <li>Supported event crew operations across multiple live productions</li>
+      </ul>
+    </div>
+    <div class="glass exp-card reveal" id="exp-marketing">
+      <div class="exp-header"><div class="exp-role">Marketing <em>· Intern</em></div><div class="exp-date">Aug 2022 to Jun 2023</div></div>
+      <div class="exp-org">Notre Dame Academy · Los Angeles, CA</div>
+      <ul class="exp-bullets"><li>Supported marketing initiatives for the school community</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="pg-section">
+  <div class="section-eyebrow">02 Leadership</div>
+  <h2>How I <em>lead</em></h2>
+  <div class="section-divider"></div>
+  <div class="lead-grid">
+    <div class="glass lead-card reveal" id="exp-event-ops"><div class="lead-org">American Marketing Association · Seattle University</div><div class="lead-role">VP of Membership</div><p class="lead-detail">Tracked membership stats to improve retention, implemented Campus Groups for efficiency, and supported content creation for the marketing team.</p></div>
+    <div class="glass lead-card reveal"><div class="lead-org">Beta Alpha Psi · Seattle University</div><div class="lead-role">VP of Marketing &amp; Competitions</div><p class="lead-detail">Grew short-form content views from 100 to 130,000+. Created a reel reposted by International Beta Alpha Psi (2,720 views). Designed posters and promotional materials.</p></div>
+    <div class="glass lead-card reveal"><div class="lead-org">Management Advancement Club · Seattle University</div><div class="lead-role">Design Director</div><p class="lead-detail">Led visual design direction for club events and communications.</p></div>
+    <div class="glass lead-card reveal" id="exp-strategy"><div class="lead-org">DTASC · Los Angeles, CA</div><div class="lead-role">Finalist, 2nd Place (2021)</div><p class="lead-detail">Competed across 75 to 80 schools. Researched a play, created a production program, publicity plan, and budget. Placed 2nd across all schools in 2021.</p></div>
+  </div>
+</section>
+
+<section class="pg-section">
+  <div class="section-eyebrow">03 Certifications</div>
+  <h2>Certified <em>skills</em></h2>
+  <div class="section-divider"></div>
+  <div class="exp-list">
+    <div class="glass exp-card reveal">
+      <div class="exp-header"><div class="exp-role">Excel Certification</div><div class="exp-date">2019</div></div>
+      <ul class="exp-bullets">
+        <li>Demonstrated proficiency in core Excel skills including formulas, functions, pivot tables, and data analysis</li>
+        <li>Validated ability to organize, analyze, and present data efficiently in a business setting</li>
+      </ul>
+    </div>
+    <div class="glass exp-card reveal">
+      <div class="exp-header"><div class="exp-role">GEO Certified <em>&middot; AI Search Optimization</em></div></div>
+      <ul class="exp-bullets">
+        <li>Certification in Generative Engine Optimization (GEO), the practice of optimizing content and brand presence to rank in AI-generated search answers (e.g. ChatGPT, Google AI Overviews, Perplexity)</li>
+        <li>Covers strategies for improving "AI visibility," helping businesses in specific niches surface as trusted answers within AI search results rather than traditional link-based rankings</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="pg-section">
+  <div class="section-eyebrow">04 Skills</div>
+  <h2>What I <em>bring</em></h2>
+  <div class="section-divider"></div>
+  <div class="skills-grid">
+    <div class="glass skill-card reveal"><span class="skill-icon">✦</span><div class="skill-name">Adobe Suite</div><div class="skill-desc">Graphic Design<br/>Photo &amp; Video Editing<br/>Content Creation</div></div>
+    <div class="glass skill-card clickable reveal" onclick="goToExperience('exp-marketing')"><span class="skill-icon">◈</span><div class="skill-name">Marketing</div><div class="skill-desc">Social Media Strategy<br/>Campaign Planning<br/>Retention Analytics</div></div>
+    <div class="glass skill-card clickable reveal" onclick="goToExperience('exp-production')"><span class="skill-icon">◇</span><div class="skill-name">Production</div><div class="skill-desc">Live Broadcast<br/>HD Camera Operation<br/>Audio / Lighting</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">✧</span><div class="skill-name">Tools</div><div class="skill-desc">Google &amp; Microsoft Suite<br/><strong style="color:#9b7dd4;">Excel Certified</strong><br/>POS Systems</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">○</span><div class="skill-name">Leadership</div><div class="skill-desc">Public Speaking<br/>Toastmasters<br/>Donor / VIP Relations</div></div>
+    <div class="glass skill-card clickable reveal" onclick="goToExperience('exp-collaboration')"><span class="skill-icon">❋</span><div class="skill-name">Collaboration</div><div class="skill-desc">Cross-team Comm.<br/>Empathy &amp; Inclusion<br/>Community Building</div></div>
+    <div class="glass skill-card clickable reveal" onclick="goToExperience('exp-asset-management')"><span class="skill-icon">◎</span><div class="skill-name">Asset Management</div><div class="skill-desc">Digital Asset Mgmt<br/>SKU &amp; Inventory Org.<br/>Cross-functional Coord.</div></div>
+    <div class="glass skill-card clickable reveal" onclick="goToExperience('exp-event-ops')"><span class="skill-icon">✶</span><div class="skill-name">Event Operations</div><div class="skill-desc">Event Planning &amp; Logistics<br/>Fundraising Support<br/>Membership Retention</div></div>
+    <div class="glass skill-card clickable reveal" onclick="goToExperience('exp-strategy')"><span class="skill-icon">❖</span><div class="skill-name">Strategy</div><div class="skill-desc">Case Competition Strategy<br/>Market Research<br/>Data-Driven Decisions</div></div>
+  </div>
+</section>
+
+<section class="pg-section" style="text-align:center;">
+  <div class="section-eyebrow">05 Contact</div>
+  <h2>Let's <em>connect</em></h2>
+  <div class="section-divider" style="margin-left:auto;margin-right:auto;"></div>
+  <div class="glass contact-card reveal">
+    <div class="about-photo-flower" style="margin:0 auto 1.5rem;"><img src="bio-photo.jpg" alt="Sarah Franco"/></div>
+    <a class="contact-email" href="mailto:sfranco1@seattleu.edu">sfranco1@seattleu.edu</a>
+    <div class="contact-links">
+      <a class="contact-link" href="tel:3102708111">(310) 270-8111</a>
+      <a class="contact-link" href="https://www.linkedin.com/in/sarah-franco2027" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="contact-link" onclick="showPage('campaigns')">Campaigns I Love</a>
+    </div>
+  </div>
+</section>
+
+<footer><span>Sarah Franco · Los Angeles, CA</span><span>B.A. Business Administration, Marketing · Magna Cume Laude, 2026</span></footer>
+</div>
+
+
+<!-- ═══════════════════════════════════ PAGE: ABOUT ═══ -->
+<div id="page-about" class="page">
+
+<div class="bap-hero">
+  <div class="hero-badge" style="margin-bottom:1.5rem;display:inline-flex;"><span class="badge-dot"></span> Los Angeles, CA</div>
+  <h1>About <em>Me</em></h1>
+  <p>Marketing, storytelling, and building communities.</p>
+</div>
+
+<div class="pg-section" style="padding-top:1rem;">
   <div class="about-stack">
     <div class="glass about-card reveal" id="bio-card">
       <div class="bio-chapter">
@@ -276,113 +406,9 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
       <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Orgs &amp; Activities</div></div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="pg-section">
-  <div class="section-eyebrow">02 Experience</div>
-  <h2>Where I've <em>worked</em></h2>
-  <div class="section-divider"></div>
-  <div class="exp-list">
-    <div class="glass exp-card reveal">
-      <div class="exp-header"><div class="exp-role">Media Production Center <em>· Student Assistant</em></div><div class="exp-date">Jul 2025 to Present</div></div>
-      <div class="exp-org">Seattle University</div>
-      <ul class="exp-bullets">
-        <li>Aided students and faculty with Adobe Suite day-to-day (11 hrs/week)</li>
-        <li>Trained others on equipment including lighting, audio, and production tools</li>
-        <li>Collaborated with team to create content for social media channels</li>
-      </ul>
-    </div>
-    <div class="glass exp-card reveal">
-      <div class="exp-header"><div class="exp-role">Digital Asset Management <em>· Intern</em></div><div class="exp-date">May to Aug 2025</div></div>
-      <div class="exp-org">Monster Energy · Corona, CA</div>
-      <ul class="exp-bullets">
-        <li>Engaged across meetings with diverse teams, asking questions and contributing ideas</li>
-        <li>Gained exposure to the inner workings of a major consumer brand</li>
-      </ul>
-    </div>
-    <div class="glass exp-card reveal">
-      <div class="exp-header"><div class="exp-role">Production Assistant <em>· Broadcast</em></div><div class="exp-date">Aug 2023 to Oct 2025</div></div>
-      <div class="exp-org">Seattle University · ESPN+</div>
-      <ul class="exp-bullets">
-        <li>Adjusted broadcasting video/audio and produced live programs with full-sized HD camera for ESPN+</li>
-        <li>Supported event crew operations across multiple live productions</li>
-      </ul>
-    </div>
-    <div class="glass exp-card reveal">
-      <div class="exp-header"><div class="exp-role">Marketing <em>· Intern</em></div><div class="exp-date">Aug 2022 to Jun 2023</div></div>
-      <div class="exp-org">Notre Dame Academy · Los Angeles, CA</div>
-      <ul class="exp-bullets"><li>Supported marketing initiatives for the school community</li></ul>
-    </div>
-  </div>
-</section>
-
-<section class="pg-section">
-  <div class="section-eyebrow">03 Leadership</div>
-  <h2>How I <em>lead</em></h2>
-  <div class="section-divider"></div>
-  <div class="lead-grid">
-    <div class="glass lead-card reveal"><div class="lead-org">American Marketing Association · Seattle University</div><div class="lead-role">VP of Membership</div><p class="lead-detail">Tracked membership stats to improve retention, implemented Campus Groups for efficiency, and supported content creation for the marketing team.</p></div>
-    <div class="glass lead-card reveal"><div class="lead-org">Beta Alpha Psi · Seattle University</div><div class="lead-role">VP of Marketing &amp; Competitions</div><p class="lead-detail">Grew short-form content views from 100 to 130,000+. Created a reel reposted by International Beta Alpha Psi (2,720 views). Designed posters and promotional materials.</p></div>
-    <div class="glass lead-card reveal"><div class="lead-org">Management Advancement Club · Seattle University</div><div class="lead-role">Design Director</div><p class="lead-detail">Led visual design direction for club events and communications.</p></div>
-    <div class="glass lead-card reveal"><div class="lead-org">DTASC · Los Angeles, CA</div><div class="lead-role">Finalist, 2nd Place (2021)</div><p class="lead-detail">Competed across 75 to 80 schools. Researched a play, created a production program, publicity plan, and budget. Placed 2nd across all schools in 2021.</p></div>
-  </div>
-</section>
-
-<section class="pg-section">
-  <div class="section-eyebrow">04 Certifications</div>
-  <h2>Certified <em>skills</em></h2>
-  <div class="section-divider"></div>
-  <div class="exp-list">
-    <div class="glass exp-card reveal">
-      <div class="exp-header"><div class="exp-role">Excel Certification</div><div class="exp-date">2019</div></div>
-      <ul class="exp-bullets">
-        <li>Demonstrated proficiency in core Excel skills including formulas, functions, pivot tables, and data analysis</li>
-        <li>Validated ability to organize, analyze, and present data efficiently in a business setting</li>
-      </ul>
-    </div>
-    <div class="glass exp-card reveal">
-      <div class="exp-header"><div class="exp-role">GEO Certified <em>&middot; AI Search Optimization</em></div></div>
-      <ul class="exp-bullets">
-        <li>Certification in Generative Engine Optimization (GEO), the practice of optimizing content and brand presence to rank in AI-generated search answers (e.g. ChatGPT, Google AI Overviews, Perplexity)</li>
-        <li>Covers strategies for improving "AI visibility," helping businesses in specific niches surface as trusted answers within AI search results rather than traditional link-based rankings</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="pg-section">
-  <div class="section-eyebrow">05 Skills</div>
-  <h2>What I <em>bring</em></h2>
-  <div class="section-divider"></div>
-  <div class="skills-grid">
-    <div class="glass skill-card reveal"><span class="skill-icon">✦</span><div class="skill-name">Adobe Suite</div><div class="skill-desc">Graphic Design<br/>Photo &amp; Video Editing<br/>Content Creation</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">◈</span><div class="skill-name">Marketing</div><div class="skill-desc">Social Media Strategy<br/>Campaign Planning<br/>Retention Analytics</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">◇</span><div class="skill-name">Production</div><div class="skill-desc">Live Broadcast<br/>HD Camera Operation<br/>Audio / Lighting</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">✧</span><div class="skill-name">Tools</div><div class="skill-desc">Google &amp; Microsoft Suite<br/><strong style="color:#9b7dd4;">Excel Certified</strong><br/>POS Systems</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">○</span><div class="skill-name">Leadership</div><div class="skill-desc">Public Speaking<br/>Toastmasters<br/>Donor / VIP Relations</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">❋</span><div class="skill-name">Collaboration</div><div class="skill-desc">Cross-team Comm.<br/>Empathy &amp; Inclusion<br/>Community Building</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">◎</span><div class="skill-name">Asset Management</div><div class="skill-desc">Digital Asset Mgmt<br/>SKU &amp; Inventory Org.<br/>Cross-functional Coord.</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">✶</span><div class="skill-name">Event Operations</div><div class="skill-desc">Event Planning &amp; Logistics<br/>Fundraising Support<br/>Membership Retention</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">❖</span><div class="skill-name">Strategy</div><div class="skill-desc">Case Competition Strategy<br/>Market Research<br/>Data-Driven Decisions</div></div>
-  </div>
-</section>
-
-<section class="pg-section" style="text-align:center;">
-  <div class="section-eyebrow">06 Contact</div>
-  <h2>Let's <em>connect</em></h2>
-  <div class="section-divider" style="margin-left:auto;margin-right:auto;"></div>
-  <div class="glass contact-card reveal">
-    <div class="about-photo-flower" style="margin:0 auto 1.5rem;"><img src="bio-photo.jpg" alt="Sarah Franco"/></div>
-    <a class="contact-email" href="mailto:sfranco1@seattleu.edu">sfranco1@seattleu.edu</a>
-    <div class="contact-links">
-      <a class="contact-link" href="tel:3102708111">(310) 270-8111</a>
-      <a class="contact-link" href="https://www.linkedin.com/in/sarah-franco2027" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="contact-link" onclick="showPage('campaigns')">Campaigns I Love</a>
-    </div>
-  </div>
-</section>
-
-<footer><span>Sarah Franco · Los Angeles, CA</span><span>B.A. Business Administration, Marketing · Magna Cume Laude, 2026</span></footer>
+<footer><span>Sarah Franco · Los Angeles, CA</span><span>About Me</span></footer>
 </div>
 
 
@@ -390,17 +416,23 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
 <div id="page-bap" class="page">
 
 <div class="bap-hero">
-  <div class="hero-badge" style="margin-bottom:1.5rem;display:inline-flex;"><span class="badge-dot"></span> Beta Alpha Psi · Seattle University</div>
-  <h1>BAP <em>Portfolio</em></h1>
-  <p>A collection of content, events, and community work as VP of Marketing &amp; Competitions.</p>
+  <div class="hero-badge" style="margin-bottom:1.5rem;display:inline-flex;"><span class="badge-dot"></span> Case Studies &amp; Leadership Work</div>
+  <h1>Previous <em>Work</em></h1>
+  <p>A collection of projects, leadership work, and community involvement.</p>
 </div>
 
 <div class="pg-section" style="padding-top:1rem;">
 
+  <div class="bap-subsection reveal" style="margin-bottom:3rem;">
+    <div class="section-eyebrow">Portfolio</div>
+    <div class="bap-section-title"><em>Beta Alpha Psi</em></div>
+    <p style="font-size:1rem;font-weight:300;color:rgba(42,36,48,0.6);line-height:1.7;max-width:600px;margin:-0.6rem 0 1.6rem;">A collection of content, events, and community work as VP of Marketing &amp; Competitions at Seattle University.</p>
+    <div class="bap-divider"></div>
+  </div>
+
   <!-- PROFESSIONAL EVENTS -->
   <div class="bap-subsection reveal">
-    <div class="section-eyebrow">Professional Events</div>
-    <div class="bap-section-title"><em>Professional Events</em></div>
+    <div class="bap-section-header" onclick="toggleBapSection(this)"><div><div class="section-eyebrow">Professional Events</div><div class="bap-section-title"><em>Professional Events</em></div></div><span class="bap-chevron">&#8964;</span></div>
     <div class="bap-divider"></div>
     <div class="photo-grid">
       <div class="photo-item glass"><img loading="lazy" onclick="openLightbox(this.src)" src="images/bap/bap-photo-001.jpg" alt="RSM"/></div>
@@ -414,8 +446,7 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
 
   <!-- MEET THE FIRMS -->
   <div class="bap-subsection reveal">
-    <div class="section-eyebrow">Professional Events</div>
-    <div class="bap-section-title">Meet the <em>Firms</em></div>
+    <div class="bap-section-header" onclick="toggleBapSection(this)"><div><div class="section-eyebrow">Professional Events</div><div class="bap-section-title">Meet the <em>Firms</em></div></div><span class="bap-chevron">&#8964;</span></div>
     <div class="bap-divider"></div>
     <div class="photo-grid">
       <div class="photo-item glass"><img loading="lazy" onclick="openLightbox(this.src)" src="images/bap/bap-photo-007.jpg" alt="Meet the Firms"/></div>
@@ -427,8 +458,7 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
 
   <!-- CANDIDATE CLASS -->
   <div class="bap-subsection reveal">
-    <div class="section-eyebrow">Candidate Class</div>
-    <div class="bap-section-title"><em>Candidate Class</em></div>
+    <div class="bap-section-header" onclick="toggleBapSection(this)"><div><div class="section-eyebrow">Candidate Class</div><div class="bap-section-title"><em>Candidate Class</em></div></div><span class="bap-chevron">&#8964;</span></div>
     <div class="bap-divider"></div>
     <div class="photo-grid">
       <div class="photo-item glass"><img loading="lazy" onclick="openLightbox(this.src)" src="images/bap/bap-photo-011.jpg" alt="Candidate Class 1"/></div>
@@ -440,8 +470,7 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
 
   <!-- APPLICATION PROCESS -->
   <div class="bap-subsection reveal">
-    <div class="section-eyebrow">Application Process</div>
-    <div class="bap-section-title"><em>Application Process</em></div>
+    <div class="bap-section-header" onclick="toggleBapSection(this)"><div><div class="section-eyebrow">Application Process</div><div class="bap-section-title"><em>Application Process</em></div></div><span class="bap-chevron">&#8964;</span></div>
     <div class="bap-divider"></div>
     <div class="photo-grid">
       <div class="photo-item glass"><img loading="lazy" onclick="openLightbox(this.src)" src="images/bap/bap-photo-015.jpg" alt="How To 1"/></div>
@@ -454,8 +483,7 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
 
   <!-- COMMUNITY SERVICE -->
   <div class="bap-subsection reveal">
-    <div class="section-eyebrow">Community Service</div>
-    <div class="bap-section-title"><em>Community Service</em></div>
+    <div class="bap-section-header" onclick="toggleBapSection(this)"><div><div class="section-eyebrow">Community Service</div><div class="bap-section-title"><em>Community Service</em></div></div><span class="bap-chevron">&#8964;</span></div>
     <div class="bap-divider"></div>
     <div class="photo-grid">
       <div class="photo-item glass"><img loading="lazy" onclick="openLightbox(this.src)" src="images/bap/bap-photo-020.jpg" alt="Bookmark Decorating"/></div>
@@ -468,8 +496,7 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
 
   <!-- OFFICER SPOTLIGHTS -->
   <div class="bap-subsection reveal">
-    <div class="section-eyebrow">Officer Spotlights</div>
-    <div class="bap-section-title"><em>Officer Spotlights</em></div>
+    <div class="bap-section-header" onclick="toggleBapSection(this)"><div><div class="section-eyebrow">Officer Spotlights</div><div class="bap-section-title"><em>Officer Spotlights</em></div></div><span class="bap-chevron">&#8964;</span></div>
     <div class="bap-divider"></div>
     <div class="officer-grid">
       <div class="officer-item glass"><img loading="lazy" onclick="openLightbox(this.src)" src="images/bap/bap-photo-025.jpg" alt="Officer Spotlight 1"/></div>
@@ -485,8 +512,16 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
     </div>
   </div>
 
+  <!-- FUTURE SECTION PLACEHOLDER -->
+  <div class="bap-subsection reveal" style="opacity:0.55;">
+    <div class="section-eyebrow">Coming Soon</div>
+    <div class="bap-section-title"><em>More Work</em></div>
+    <div class="bap-divider"></div>
+    <p style="font-size:0.95rem;font-weight:300;color:var(--muted);">More projects and case studies will live here soon.</p>
+  </div>
+
 </div>
-<footer><span>Sarah Franco · Beta Alpha Psi Portfolio</span><span>VP of Marketing &amp; Competitions</span></footer>
+<footer><span>Sarah Franco · Previous Work</span><span>VP of Marketing &amp; Competitions</span></footer>
 </div>
 
 
@@ -561,6 +596,17 @@ function showPage(id) {
   initReveal();
 }
 
+function goToExperience(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.classList.add('on');
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  target.classList.remove('highlight');
+  void target.offsetWidth;
+  target.classList.add('highlight');
+  setTimeout(() => target.classList.remove('highlight'), 1700);
+}
+
 function initReveal() {
   const items = document.querySelectorAll('.page.active .reveal');
   const observer = new IntersectionObserver(entries => {
@@ -581,6 +627,11 @@ function toggleBio() {
   const btn = document.getElementById('bioToggleBtn');
   card.classList.toggle('expanded');
   btn.textContent = card.classList.contains('expanded') ? 'Show less' : 'Read more';
+}
+
+function toggleBapSection(headerEl) {
+  const section = headerEl.closest('.bap-subsection');
+  section.classList.toggle('collapsed');
 }
 
 function openLightbox(src) {
