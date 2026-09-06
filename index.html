@@ -55,7 +55,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 }
 
 /* SECTIONS */
-.pg-section{position:relative;z-index:2;padding:6rem 2rem;max-width:1000px;margin:0 auto;}
+.pg-section{position:relative;z-index:2;padding:3.5rem 2rem;max-width:1000px;margin:0 auto;}
 .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;color:var(--muted);text-transform:uppercase;margin-bottom:0.6rem;}
 h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--ink);margin-bottom:0.2em;letter-spacing:-0.01em;}
 h2 em{font-style:italic;}
@@ -80,12 +80,23 @@ h1 em{display:block;font-style:italic;background:linear-gradient(135deg,#9b7dd4,
 @keyframes rise{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
 /* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+.about-stack{display:flex;flex-direction:column;gap:2rem;}
 .about-card{padding:2.5rem;}
 .about-card p{font-size:1.05rem;font-weight:300;color:rgba(42,36,48,0.7);line-height:1.85;margin-bottom:1rem;}
 .about-card p:last-child{margin-bottom:0;}
 .about-card strong{color:var(--ink);font-weight:500;}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;border-radius:24px;overflow:hidden;}
+.bio-chapter-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;background:linear-gradient(135deg,#9b7dd4,#d4679a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.4rem;}
+.bio-chapter{margin-bottom:1.6rem;}
+.bio-chapter:last-child{margin-bottom:0;}
+#bio-card{position:relative;overflow:hidden;max-height:400px;padding-bottom:4rem;transition:max-height 0.5s ease;}
+#bio-card.expanded{max-height:2000px;}
+#bio-card::after{content:'';position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to bottom,rgba(255,255,255,0),rgba(250,247,252,0.95));pointer-events:none;transition:opacity 0.3s;}
+#bio-card.expanded::after{opacity:0;}
+.bio-toggle{position:absolute;right:1.8rem;bottom:1.3rem;z-index:2;background:rgba(255,255,255,0.75);backdrop-filter:blur(10px);border:1px solid rgba(42,36,48,0.15);border-radius:100px;padding:0.5rem 1.2rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.25s;}
+.bio-toggle:hover{color:var(--ink);border-color:rgba(42,36,48,0.3);background:rgba(255,255,255,0.95);}
+.about-photo-circle{width:130px;height:130px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.85);box-shadow:0 4px 20px rgba(160,120,200,0.18);}
+.about-photo-circle img{width:100%;height:100%;object-fit:cover;display:block;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;border-radius:20px;overflow:hidden;}
 .stat{padding:2rem 1.5rem;background:rgba(255,255,255,0.5);backdrop-filter:blur(16px);text-align:center;}
 .stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:300;background:linear-gradient(135deg,#9b7dd4,#d4679a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.25;padding-top:0.1em;margin-bottom:0.2rem;}
 .stat-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;}
@@ -187,7 +198,6 @@ footer span{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.1
   .nav-links{gap:0.8rem;}
   .nav-links a{font-size:0.5rem;}
   .pg-section{padding:4rem 1.2rem;}
-  .about-grid{grid-template-columns:1fr;}
   footer{padding:1.5rem;flex-direction:column;gap:0.5rem;text-align:center;}
   .card-body{padding:2rem 1.5rem;}
 }
@@ -239,11 +249,26 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
   <div class="section-eyebrow">01 About</div>
   <h2>A little about <em>me</em></h2>
   <div class="section-divider"></div>
-  <div class="about-grid">
-    <div class="glass about-card reveal">
-      <p>I'm a <strong>Marketing major</strong> at Seattle University, graduating a year early in June 2026. I'm based in <strong>Los Angeles</strong>, with hands-on experience spanning digital asset management, live broadcast production, social media content, and event operations.</p>
-      <p>I've interned at <strong>Monster Energy</strong>, produced live programs for <strong>ESPN+</strong>, and led membership and marketing initiatives for multiple student organizations, all while maintaining a spot on the Dean's Honors List 11 times.</p>
-      <p>I bring together <strong>analytical thinking and creative energy</strong>, equally comfortable building a marketing strategy, editing in Adobe Suite, or speaking in front of a crowd.</p>
+  <div class="about-stack">
+    <div class="glass about-card reveal" id="bio-card">
+      <div class="about-photo-circle" style="margin:0 auto 1.5rem;"><img src="bio-photo.jpg" alt="Sarah Franco"/></div>
+      <div class="bio-chapter">
+        <div class="bio-chapter-title">Character Bio</div>
+        <p>I'm a <strong>Marketing graduate</strong> from Seattle University, having completed my Bachelor's degree a year early (June 2026) with magna cum laude honors. I'm based in <strong>Los Angeles</strong>, with hands-on experience spanning digital asset management, live broadcast production, social media content, and event operations.</p>
+      </div>
+      <div class="bio-chapter">
+        <div class="bio-chapter-title">The Perfect Preparation Arc</div>
+        <p>At <strong>Monster Energy</strong>, I worked cross-functionally with marketing and IT teams to organize hundreds of SKUs across multiple countries, gaining exposure to how global product lines are managed and marketed at scale. I also produced live programs for <strong>ESPN+</strong>, working behind the scenes on live broadcast operations.</p>
+      </div>
+      <div class="bio-chapter">
+        <div class="bio-chapter-title">Little Smiski Teamwork</div>
+        <p>I led marketing efforts for <strong>Beta Alpha Psi</strong>, where I helped make the accounting club feel fresh and engaging for a Gen Z audience. As VP of Membership for <strong>AMA</strong>, I regularly spoke directly with members about club opportunities, planned events, supported fundraising efforts, and tracked membership retention rates.</p>
+      </div>
+      <div class="bio-chapter">
+        <div class="bio-chapter-title">Roll Credits: Ending Theme</div>
+        <p>I've competed in two business competitions, where I sharpened my ability to think both creatively and strategically under pressure, and maintained a spot on the <strong>Dean's Honors List</strong> throughout my studies. I bring together <strong>analytical thinking and creative energy</strong>, equally comfortable building a marketing strategy, editing in Adobe Suite, or speaking in front of a crowd.</p>
+      </div>
+      <button class="bio-toggle" id="bioToggleBtn" onclick="toggleBio()">Read more</button>
     </div>
     <div class="stat-grid reveal">
       <div class="stat"><div class="stat-num">11x</div><div class="stat-label">Dean's Honors</div></div>
@@ -305,21 +330,7 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
 </section>
 
 <section class="pg-section">
-  <div class="section-eyebrow">04 Skills</div>
-  <h2>What I <em>bring</em></h2>
-  <div class="section-divider"></div>
-  <div class="skills-grid">
-    <div class="glass skill-card reveal"><span class="skill-icon">✦</span><div class="skill-name">Adobe Suite</div><div class="skill-desc">Graphic Design<br/>Photo &amp; Video Editing<br/>Content Creation</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">◈</span><div class="skill-name">Marketing</div><div class="skill-desc">Social Media Strategy<br/>Campaign Planning<br/>Retention Analytics</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">◇</span><div class="skill-name">Production</div><div class="skill-desc">Live Broadcast<br/>HD Camera Operation<br/>Audio / Lighting</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">✧</span><div class="skill-name">Tools</div><div class="skill-desc">Google &amp; Microsoft Suite<br/><strong style="color:#9b7dd4;">Excel Certified</strong><br/>POS Systems</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">○</span><div class="skill-name">Leadership</div><div class="skill-desc">Public Speaking<br/>Toastmasters<br/>Donor / VIP Relations</div></div>
-    <div class="glass skill-card reveal"><span class="skill-icon">❋</span><div class="skill-name">Collaboration</div><div class="skill-desc">Cross-team Comm.<br/>Empathy &amp; Inclusion<br/>Community Building</div></div>
-  </div>
-</section>
-
-<section class="pg-section">
-  <div class="section-eyebrow">05 Certifications</div>
+  <div class="section-eyebrow">04 Certifications</div>
   <h2>Certified <em>skills</em></h2>
   <div class="section-divider"></div>
   <div class="exp-list">
@@ -337,6 +348,23 @@ a{cursor:url('butterfly.png') 18 18, pointer;}
         <li>Covers strategies for improving "AI visibility," helping businesses in specific niches surface as trusted answers within AI search results rather than traditional link-based rankings</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section class="pg-section">
+  <div class="section-eyebrow">05 Skills</div>
+  <h2>What I <em>bring</em></h2>
+  <div class="section-divider"></div>
+  <div class="skills-grid">
+    <div class="glass skill-card reveal"><span class="skill-icon">✦</span><div class="skill-name">Adobe Suite</div><div class="skill-desc">Graphic Design<br/>Photo &amp; Video Editing<br/>Content Creation</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">◈</span><div class="skill-name">Marketing</div><div class="skill-desc">Social Media Strategy<br/>Campaign Planning<br/>Retention Analytics</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">◇</span><div class="skill-name">Production</div><div class="skill-desc">Live Broadcast<br/>HD Camera Operation<br/>Audio / Lighting</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">✧</span><div class="skill-name">Tools</div><div class="skill-desc">Google &amp; Microsoft Suite<br/><strong style="color:#9b7dd4;">Excel Certified</strong><br/>POS Systems</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">○</span><div class="skill-name">Leadership</div><div class="skill-desc">Public Speaking<br/>Toastmasters<br/>Donor / VIP Relations</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">❋</span><div class="skill-name">Collaboration</div><div class="skill-desc">Cross-team Comm.<br/>Empathy &amp; Inclusion<br/>Community Building</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">◎</span><div class="skill-name">Asset Management</div><div class="skill-desc">Digital Asset Mgmt<br/>SKU &amp; Inventory Org.<br/>Cross-functional Coord.</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">✶</span><div class="skill-name">Event Operations</div><div class="skill-desc">Event Planning &amp; Logistics<br/>Fundraising Support<br/>Membership Retention</div></div>
+    <div class="glass skill-card reveal"><span class="skill-icon">❖</span><div class="skill-name">Strategy</div><div class="skill-desc">Case Competition Strategy<br/>Market Research<br/>Data-Driven Decisions</div></div>
   </div>
 </section>
 
@@ -547,6 +575,13 @@ function initReveal() {
 }
 
 window.addEventListener('DOMContentLoaded', initReveal);
+
+function toggleBio() {
+  const card = document.getElementById('bio-card');
+  const btn = document.getElementById('bioToggleBtn');
+  card.classList.toggle('expanded');
+  btn.textContent = card.classList.contains('expanded') ? 'Show less' : 'Read more';
+}
 
 function openLightbox(src) {
   document.getElementById('lightbox-img').src = src;
